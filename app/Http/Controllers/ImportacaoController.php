@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\ExcelUpload\GetDadosExcelBaseService;
+use App\Services\ExcelUpload\SaveDadosExcelBaseService;
 use PhpOffice\PhpSpreadsheet\Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -10,7 +11,8 @@ use Illuminate\Http\Request;
 class ImportacaoController extends Controller
 {
     public function __construct(
-        private GetDadosExcelBaseService $getDadosExcelBaseService
+        private GetDadosExcelBaseService $getDadosExcelBaseService,
+        private SaveDadosExcelBaseService $saveDadosExcelBaseService,
     ) {
     }
 
@@ -32,8 +34,10 @@ class ImportacaoController extends Controller
             ], 400);
         }
 
-        return response()->json(
-            $this->getDadosExcelBaseService->execute($fileExcel->getPathname())
-        );
+        $dadosExcelOutput = $this->getDadosExcelBaseService->execute($fileExcel->getPathname());
+        return response()->json([
+            'message' => 'Foram adicionados ' .
+                $this->saveDadosExcelBaseService->execute($dadosExcelOutput->getDadosProdutos()) . ' produtos.'
+        ]);
     }
 }
