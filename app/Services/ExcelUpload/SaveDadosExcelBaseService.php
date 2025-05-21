@@ -12,29 +12,35 @@ class SaveDadosExcelBaseService
     }
     public function execute(array $produtos): int
     {
+        $this->repository->createBackup();
         $this->repository->deleteAll();
 
         $totalProdutosAdicionados = 0;
         foreach ($produtos as $index => $p) {
-            $produto = [
-                'id' => $index + 1,
-                'produto' => $p['EMBALAGEM / PRODUTO'],
-                'codigo' => (int) $p['CÓD.'],
-                'custo' => (float) $p['CUSTO'],
-                'fee_hke' => $p['FEE HKE'],
-                'pis_cof' => (float) $p['PIS - COF'],
-                'medio' => (float) $p['MÉDIO'],
-                'qtde' => (int) $p['QTDE'],
-                'total' => (int) $p['Y'],
-                'preco' => (float) $p['PREÇO '],
-                'qnt_x_custo' => (float) $p['QUANT * CUSTO'],
-                'qnt_x_venda' => (float) $p['QUANT * V. VENDA'],
-                'diferenca_reais' => (float) $p['DIFER. R$'],
-                'markup' => (float) $p['MARKUP'],
-            ];
+            $produto = $this->buildArrayProduto($index, $p);
             $this->repository->save($produto);
             $totalProdutosAdicionados++;
         }
         return $totalProdutosAdicionados;
+    }
+
+    private function buildArrayProduto(int $index, array $produto): array
+    {
+        return [
+            'id' => $index + 1,
+            'produto' => $produto['EMBALAGEM / PRODUTO'],
+            'codigo' => (int) $produto['CÓD.'],
+            'custo' => (float) $produto['CUSTO'],
+            'fee_hke' => $produto['FEE HKE'],
+            'pis_cof' => (float) $produto['PIS - COF'],
+            'medio' => (float) $produto['MÉDIO'],
+            'qtde' => (int) $produto['QTDE'],
+            'total' => (int) $produto['Y'],
+            'preco' => (float) $produto['PREÇO '],
+            'qnt_x_custo' => (float) $produto['QUANT * CUSTO'],
+            'qnt_x_venda' => (float) $produto['QUANT * V. VENDA'],
+            'diferenca_reais' => (float) $produto['DIFER. R$'],
+            'markup' => (float) $produto['MARKUP'],
+        ];
     }
 }

@@ -8,5 +8,5 @@ interface ProdutoRepositoryInterface
     public function deleteAll(): void;
     public function removeIdRowsDeleted(): void;
     public function addIdRowsDeleted(): void;
-    public function createBackupProdutos(): void;
+    public function createBackup(): void;
 }

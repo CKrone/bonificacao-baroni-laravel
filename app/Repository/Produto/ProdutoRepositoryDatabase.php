@@ -16,6 +16,11 @@ class ProdutoRepositoryDatabase implements ProdutoRepositoryInterface
         Produto::query()->delete();
     }
 
+    public function createBackup(): void
+    {
+        // TODO: Implement createBackupProdutos() method.
+    }
+
     public function removeIdRowsDeleted(): void
     {
         // TODO: Implement removeIdRowsDeleted() method.
@@ -25,10 +30,4 @@ class ProdutoRepositoryDatabase implements ProdutoRepositoryInterface
     {
         // TODO: Implement addIdRowsDeleted() method.
     }
-
-    public function createBackupProdutos(): void
-    {
-        // TODO: Implement createBackupProdutos() method.
-    }
-
 }
