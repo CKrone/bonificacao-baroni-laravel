@@ -1,8 +1,9 @@
 ## Sobre o Projeto
 
-Projeto tem como objetivo gerar um excel com o valor médio e a quantidade de vendas a partir do relatório de vendas de cada vendedor.
+Projeto tem como objetivo gerar um excel com o valor médio e a quantidade de vendas a partir do relatório de vendas em PDF.
+O projeto foi criado por mim a fim de ajudar um colega na preenchimento dos dados. Já está em uso a mais de 6 meses.
 
 ## Aprendendo Laravel
 
-O projeto já existe e é utilizado por um colega, o solicitante, mas resolvi recriar ele em Laravel para fins de estudo.
+Para fins de estudo, resolvi recriar o projeto em Laravel e usando Docker.
 
