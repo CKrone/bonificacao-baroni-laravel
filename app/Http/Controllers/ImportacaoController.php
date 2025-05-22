@@ -34,10 +34,10 @@ class ImportacaoController extends Controller
             ], 400);
         }
 
-        $dadosExcelOutput = $this->getDadosExcelBaseService->execute($fileExcel->getPathname());
+        $excelOutput = $this->getDadosExcelBaseService->execute($fileExcel->getPathname());
         return response()->json([
             'message' => 'Foram adicionados ' .
-                $this->saveDadosExcelBaseService->execute($dadosExcelOutput->getDadosProdutos()) . ' produtos.'
+                $this->saveDadosExcelBaseService->execute($excelOutput->getDadosProdutos()) . ' produtos.'
         ]);
     }
 }
