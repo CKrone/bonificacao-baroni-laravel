@@ -2,6 +2,7 @@
 
 namespace App\Services\ExcelUpload;
 
+use App\Services\ExcelUpload\InputOuputdata\DadosExcelBaseOutput;
 use PhpOffice\PhpSpreadsheet\Exception;
 
 class GetDadosExcelBaseService
@@ -10,7 +11,7 @@ class GetDadosExcelBaseService
      * @throws Exception
      * @throws \Exception
      */
-    public function execute(string $filePath): array
+    public function execute(string $filePath): DadosExcelBaseOutput
     {
         $excel = new ArquivoExcelBase($filePath);
         $excel->definirColunas('EMBALAGEM / PRODUTO', 'EMBALAGEM / PRODUTO');
@@ -27,6 +28,9 @@ class GetDadosExcelBaseService
         $excel->definirColunas('DIFER. R$', 'DIFER. R$');
         $excel->definirColunas('MARKUP', 'MARKUP');
 
-        return $excel->getArrayDados();
+        return new DadosExcelBaseOutput(
+            $excel->getArrayDados(),
+            $excel->getIdRowsDeleted(),
+        );
     }
 }
