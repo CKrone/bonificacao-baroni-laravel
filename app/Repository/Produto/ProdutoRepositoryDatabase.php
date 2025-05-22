@@ -2,6 +2,7 @@
 
 namespace App\Repository\Produto;
 
+use Illuminate\Support\Facades\{Schema, DB};
 use App\Models\Produto;
 
 class ProdutoRepositoryDatabase implements ProdutoRepositoryInterface
@@ -18,7 +19,15 @@ class ProdutoRepositoryDatabase implements ProdutoRepositoryInterface
 
     public function createBackup(): void
     {
-        // TODO: Implement createBackupProdutos() method.
+        $tableBackup = 'backup_produto';
+        $tableProduto = 'produto';
+
+        if (Schema::hasTable($tableBackup)) {
+            Schema::drop($tableBackup);
+        }
+
+        DB::statement("CREATE TABLE {$tableBackup} LIKE {$tableProduto}");
+        DB::statement("INSERT INTO {$tableBackup} SELECT * FROM {$tableProduto}");
     }
 
     public function removeIdRowsDeleted(): void
