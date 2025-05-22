@@ -29,14 +29,4 @@ class ProdutoRepositoryDatabase implements ProdutoRepositoryInterface
         DB::statement("CREATE TABLE {$tableBackup} LIKE {$tableProduto}");
         DB::statement("INSERT INTO {$tableBackup} SELECT * FROM {$tableProduto}");
     }
-
-    public function removeIdRowsDeleted(): void
-    {
-        // TODO: Implement removeIdRowsDeleted() method.
-    }
-
-    public function addIdRowsDeleted(): void
-    {
-        // TODO: Implement addIdRowsDeleted() method.
-    }
 }
