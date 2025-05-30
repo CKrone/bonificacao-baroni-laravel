@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\ExcelUpload\GetDadosExcelBaseService;
 use App\Services\ExcelUpload\SaveDadosExcelBaseService;
 use App\Services\ExcelUpload\SaveIdRowsDeletedService;
+use App\Services\PDFUpload\GetDadosRelatorioPDFService;
 use PhpOffice\PhpSpreadsheet\Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -15,6 +16,7 @@ class ImportacaoController extends Controller
         private GetDadosExcelBaseService $getDadosExcelBaseService,
         private SaveDadosExcelBaseService $saveDadosExcelBaseService,
         private SaveIdRowsDeletedService $saveIdRowsDeletedService,
+        private GetDadosRelatorioPDFService $getDadosRelatorioPDFService,
     ) {
     }
 
@@ -41,6 +43,28 @@ class ImportacaoController extends Controller
         return response()->json([
             'message' => 'Foram adicionados ' .
                 $this->saveDadosExcelBaseService->execute($excelOutput->getDadosProdutos()) . ' produtos.'
+        ]);
+    }
+
+    public function uploadRelatorio(Request $request): JsonResponse
+    {
+        $pdfFile = $request->file('file');
+        if (! $pdfFile) {
+            return response()->json([
+                'message' => 'Por favor, adicione um arquivo no formato .pdf'
+            ], 400);
+        }
+
+        if ($pdfFile->getClientOriginalExtension() !== 'pdf') {
+            return response()->json([
+                'message' => 'Arquivo com formato inválido, formato aceito .pdf'
+            ], 400);
+        }
+
+        $dadosPdf = $this->getDadosRelatorioPDFService->execute($pdfFile->getPathname());
+
+        return response()->json([
+            'message' => '',
         ]);
     }
 }
