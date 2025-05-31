@@ -64,7 +64,7 @@ class ImportacaoController extends Controller
         $dadosPdf = $this->getDadosRelatorioPDFService->execute($pdfFile->getPathname());
 
         return response()->json([
-            'message' => '',
+            'message' => $dadosPdf,
         ]);
     }
 }

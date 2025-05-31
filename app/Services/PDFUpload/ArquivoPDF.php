@@ -68,7 +68,7 @@ class ArquivoPDF
                 $oitavoindice = $indiceCX + 8;
                 $setimoIndice = $indiceCX + 7;
 
-                if ($item[$indiceCX + 6] != '') {
+                if (isset($item[$indiceCX + 6]) && $item[$indiceCX + 6] != '') {
                     $nonoIndice = $indiceCX + 6 + self::INDEX_BONIFICACAO;
                     if ($item[$nonoIndice] == '' && $item[$nonoIndice + 1] != '') {
                         $nonoIndice += 1;
@@ -198,7 +198,7 @@ class ArquivoPDF
         $totalLinhas = count($dados);
 
         foreach ($dados as $indice => $linha) {
-            if ($indice + 1 < $totalLinhas && is_array($dados[$indice + 1])) {
+            if ($indice + 1 < $totalLinhas && (isset($dados[$indice + 1]) && is_array($dados[$indice + 1]))) {
                 $qntColumns = count($dados[$indice + 1]);
                 if ($this->calculateHalfBox($qntColumns)) {
                     if (isset($linha[self::INDEX_COLUNA_VENDAS])) {
