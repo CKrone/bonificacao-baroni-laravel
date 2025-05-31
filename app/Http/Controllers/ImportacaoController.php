@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\ExcelUpload\GetDadosExcelBaseService;
-use App\Services\ExcelUpload\SaveDadosExcelBaseService;
-use App\Services\ExcelUpload\SaveIdRowsDeletedService;
+use App\Services\Bonificacao\GetBonificacaoRelatorioService;
 use App\Services\PDFUpload\GetDadosRelatorioPDFService;
+use App\Services\ExcelUpload\SaveDadosExcelBaseService;
+use App\Services\ExcelUpload\GetDadosExcelBaseService;
+use App\Services\ExcelUpload\SaveIdRowsDeletedService;
 use PhpOffice\PhpSpreadsheet\Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -17,6 +18,7 @@ class ImportacaoController extends Controller
         private SaveDadosExcelBaseService $saveDadosExcelBaseService,
         private SaveIdRowsDeletedService $saveIdRowsDeletedService,
         private GetDadosRelatorioPDFService $getDadosRelatorioPDFService,
+        private GetBonificacaoRelatorioService $getBonificacaoRelatorioService,
     ) {
     }
 
@@ -63,8 +65,8 @@ class ImportacaoController extends Controller
 
         $dadosPdf = $this->getDadosRelatorioPDFService->execute($pdfFile->getPathname());
 
-        return response()->json([
-            'message' => $dadosPdf,
-        ]);
+        return response()->json(
+            $this->getBonificacaoRelatorioService->execute($dadosPdf)
+        );
     }
 }
