@@ -14,6 +14,7 @@ criava-se um excel padrão com todos os produtos listados e nesse excel ia inser
 
 ## Solução
 
+O projeto consiste em uma camada de front-end: https://github.com/CKrone/bonificacao-baroni-vue e esta que é a camada de back-end.
 
 
 ## Ganhos
