@@ -31,7 +31,7 @@ class SaveDadosExcelBaseService
             'produto' => $produto['EMBALAGEM / PRODUTO'],
             'codigo' => (int) $produto['CÓD.'],
             'custo' => (float) $produto['CUSTO'],
-            'fee_hke' => $produto['FEE HKE'],
+            'fee_hke' => (float) $produto['FEE HKE'],
             'pis_cof' => (float) $produto['PIS - COF'],
             'medio' => (float) $produto['MÉDIO'],
             'qtde' => (int) $produto['QTDE'],
