@@ -26,6 +26,6 @@ Por fim, o usuário só precisa copiar essas colunas do novo Excel e colar diret
 
 ## Ganhos
 
-A empresa possui 9 vendedores o que levava dias para o preenchimentos de todos, gerando vários erros por conta de preenchimento incorreto.
-Atualmente em menos de 2 horas é feito o preenchimento de todos vendedores e conferência.
+A empresa possui 9 vendedores levand em torno de 25 minutos cada vendedor, sem contar erros de preenchimento, correções, assim podendo levar mais de um dia
+por ser maçante e pelo retrabalho. Atualmente em menos de 1 hora é feito o preenchimento de todos vendedores e planilha de conferência.
 
