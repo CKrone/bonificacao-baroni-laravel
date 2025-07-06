@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\Produto\GetAllProdutosExportacaoService;
 use App\Services\RowsDeleted\GetIdRowsDeletedService;
 use PhpOffice\PhpSpreadsheet\Exception;
 use Illuminate\Http\JsonResponse;
@@ -10,8 +11,8 @@ use Illuminate\Http\Request;
 class ProdutoController extends Controller
 {
     public function __construct(
+        private GetAllProdutosExportacaoService $produtosExportacaoService,
         private GetIdRowsDeletedService $getIdRowsDeletedService,
-
     ) {
     }
 
@@ -20,9 +21,7 @@ class ProdutoController extends Controller
      */
     public function getProdutosExportacao(Request $request): JsonResponse
     {
-        return response()->json(
-            'dale'
-        );
+        return response()->json($this->produtosExportacaoService->execute());
     }
 
     public function getIdRowsDeleted(): JsonResponse

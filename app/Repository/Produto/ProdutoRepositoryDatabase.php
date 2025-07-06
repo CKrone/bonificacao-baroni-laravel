@@ -29,4 +29,12 @@ class ProdutoRepositoryDatabase implements ProdutoRepositoryInterface
         DB::statement("CREATE TABLE {$tableBackup} LIKE {$tableProduto}");
         DB::statement("INSERT INTO {$tableBackup} SELECT * FROM {$tableProduto}");
     }
+
+    public function findAll(): array
+    {
+        return Produto::selectRaw('id, codigo, produto, 0 as qtde, 0 as preco')
+            ->orderBy('id', 'ASC')
+            ->get()
+            ->toArray();
+    }
 }
