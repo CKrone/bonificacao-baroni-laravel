@@ -6,7 +6,6 @@ use App\Services\Produto\GetAllProdutosExportacaoService;
 use App\Services\RowsDeleted\GetIdRowsDeletedService;
 use PhpOffice\PhpSpreadsheet\Exception;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class ProdutoController extends Controller
 {
@@ -19,7 +18,7 @@ class ProdutoController extends Controller
     /**
      * @throws Exception
      */
-    public function getProdutosExportacao(Request $request): JsonResponse
+    public function getProdutosExportacao(): JsonResponse
     {
         return response()->json($this->produtosExportacaoService->execute());
     }
